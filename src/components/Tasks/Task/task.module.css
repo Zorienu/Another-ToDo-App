@@ -1,0 +1,21 @@
+.taskItem {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.taskContainer {
+	margin: 15px 0px; 
+}
+
+.taskBody {
+	font-size: 18px;
+}
+
+.button {
+	margin: 0 10px;
+}
+
+.buttons {
+	display: flex;
+}
