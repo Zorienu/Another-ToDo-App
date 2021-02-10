@@ -4,6 +4,7 @@ import {
   UPDATE_TASK,
   GET_TASKS,
   SET_CURRENT_TASK,
+  CHANGE_IS_PENDING,
 } from "./types";
 
 const reducer = (state, action) => {
@@ -27,6 +28,8 @@ const reducer = (state, action) => {
       let currentTask = state.tasks.find((task) => task.id === action.payload);
       if (!currentTask) currentTask = null;
       return { ...state, currentTask };
+    case CHANGE_IS_PENDING:
+      return { ...state, isPending: !state.isPending };
     default:
       return state;
   }

@@ -4,7 +4,7 @@ import TasksContext from "../../context/TasksContext";
 import classes from "./addTask.module.css";
 
 const AddTask = () => {
-  const { createTask, currentTask, tasks, setCurrentTask, updateTask } = useContext(
+  const { createTask, currentTask, isPending, setCurrentTask, updateTask } = useContext(
     TasksContext
   );
   const initialTaskState = { body: "", isDone: false };
@@ -47,7 +47,11 @@ const AddTask = () => {
       </div>
       <div className={classes.buttons}>
         <div className={classes.button}>
-          <button className="nes-btn is-success" onClick={(e) => handleSubmit(e)}>
+          <button
+            className={`nes-btn ${isPending ? "is-disabled" : "is-success"}`}
+            disabled={isPending}
+            onClick={(e) => handleSubmit(e)}
+          >
             {currentTask ? "Edit Task" : "Add Task"}
           </button>
         </div>

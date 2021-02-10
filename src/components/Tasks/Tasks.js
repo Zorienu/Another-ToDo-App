@@ -11,7 +11,7 @@ const Tasks = () => {
   return (
     <>
       {!tasks ? (
-        <div>Loading...</div>
+        <div style={{ marginTop: "20px" }}>Loading...</div>
       ) : (
         tasks.map((task) => (
           <Task body={task.body} isDone={task.isDone} id={task.id} key={task.id} />
