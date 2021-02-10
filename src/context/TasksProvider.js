@@ -20,13 +20,12 @@ const TasksProvider = (props) => {
 
   const createTask = async (newTask) => {
     const res = await axios.post("http://localhost:8000/tasks", newTask);
+    dispatch({ type: "CREATE_TASK", payload: res.data });
     console.log(res.data);
   };
 
-  //const setCurrentTaksId = (id) => (state.currentTaskId = id);
   const setCurrentTask = (id) => {
     dispatch({ type: "SET_CURRENT_TASK", payload: id });
-    console.log(state.currentTask);
   };
 
   const deleteTask = async (id) => {
@@ -42,19 +41,27 @@ const TasksProvider = (props) => {
     const res = await axios.patch("http://localhost:8000/tasks/" + id, {
       isDone: !data.isDone,
     });
-    dispatch({ type: "EDIT_TASK", payload: res.data });
+    dispatch({ type: "UPDATE_TASK", payload: res.data });
+  };
+
+  const updateTask = async (task) => {
+    const { data } = await axios.patch("http://localhost:8000/tasks/" + task.id, {
+      body: task.body,
+    });
+    dispatch({ type: "UPDATE_TASK", payload: data });
   };
 
   return (
     <TasksContext.Provider
       value={{
         tasks: state.tasks,
-        selectedTask: state.selectedTask,
+        currentTask: state.currentTask,
         setCurrentTask,
         getTasks,
         createTask,
         deleteTask,
         changeTaskState,
+        updateTask,
       }}
     >
       {props.children}

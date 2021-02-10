@@ -3,7 +3,7 @@ import { useContext } from "react";
 import TasksContext from "../../../context/TasksContext";
 
 const Task = ({ body, isDone, id }) => {
-  const { deleteTask, changeTaskState } = useContext(TasksContext);
+  const { setCurrentTask, deleteTask, changeTaskState } = useContext(TasksContext);
 
   return (
     <div className={classes.taskContainer}>
@@ -19,7 +19,9 @@ const Task = ({ body, isDone, id }) => {
         </label>
         <div className={classes.buttons}>
           <div className={classes.button}>
-            <button className="nes-btn is-primary">Edit</button>
+            <button className="nes-btn is-primary" onClick={() => setCurrentTask(id)}>
+              Edit
+            </button>
           </div>
           <div className={classes.button}>
             <button onClick={() => deleteTask(id)} className="nes-btn is-error">
